@@ -9,7 +9,7 @@ fn main() {
 
 #[test]
 fn test() {
-    let parsed = parser::ProgramParser::new().parse("x = 13; write8 xyz 24;").unwrap();
+    let parsed = parser::ProgramParser::new().parse("x = 14 + 7 * 2;").unwrap();
     // debug print
     println!("{:?}", parsed);
     assert!(false);

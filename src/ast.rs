@@ -18,15 +18,15 @@ pub enum Expr {
 
 #[derive(Debug)]
 pub enum Statement {
-    Write8(Expr, Expr),
+    Write8(i32, i32),
 }
 
 #[derive(Debug)]
 pub enum Declaration {
-    Assign(String, Expr),
+    Assign(String, i32),
     Statement(Statement),
 }
 
-pub struct Program {
-    pub declarations: Vec<Declaration>,
-}
+// pub struct Program {
+//     pub declarations: Vec<Declaration>,
+// }
