@@ -2,14 +2,15 @@ use std::str::FromStr;
 use agl_rs::ast::*;
 use std::collections::HashMap;
 
-grammar(symbols: &HashMap<String, i32>);
+grammar(symbols: &mut HashMap<String, i32>);
 
 pub Program: Vec<Declaration> = {
     <Declaration*> => <>
 }
 
 Declaration: Declaration = {
-    <Ident> "=" <Expr> ";" => { 
+    <i:Ident> "=" <e:Expr> ";" => { 
+        symbols.insert(i.clone(), e);
         Declaration::Assign(<>)
         // set the value of the identifier in the symbol table
     },
@@ -30,7 +31,10 @@ Factor: i32 = {
 
 Term: i32 = {
     Num,
-    // Ident, => look up in symbol table
+    <i:Ident> => {
+        // lookup the value of the identifier in the symbol table
+        symbols.get(&i).unwrap().clone()
+    },
     "(" <Expr> ")",
 };
 
