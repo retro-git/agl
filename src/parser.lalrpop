@@ -8,18 +8,12 @@ pub Program: Vec<Declaration> = {
 }
 
 Declaration: Declaration = {
-    <Ident> "=" <Expr> ";" => Declaration::Assign(<>),
+    <Ident> "=" <Expr> ";" => { 
+        Declaration::Assign(<>)
+        // set the value of the identifier in the symbol table
+    },
     "write8" <Expr> <Expr> ";" => Declaration::Statement(Statement::Write8(<>)), 
 }
-
-// Assign: (String, Box<Expr>) = {
-//     <Ident> "=" <Expr> => (name, expr)
-// }
-
-// Expr: Expr = {
-//     Int => Expr::Int(<>),
-//     Ident => Expr::Ident(<>),
-// }
 
 Expr: i32 = {
     <l:Expr> "+" <r:Factor> => l + r,
@@ -35,6 +29,7 @@ Factor: i32 = {
 
 Term: i32 = {
     Num,
+    // Ident, => look up in symbol table
     "(" <Expr> ")",
 };
 
@@ -50,33 +45,6 @@ Ident: String = {
 Int: i32 = {
     <n:r"[0-9]+"> => i32::from_str(n).unwrap()
 }
-
-// Number: f64 = {
-//     <n:r"[0-9]+(\.[0-9]+)?"> => f64::from_str(n).unwrap()
-// }
-
-// Expr: Expr = {
-//     <e:Term> "+" <e2:Expr> => Expr::Add(Box::new(e), Box::new(e2)),
-//     <e:Term> "-" <e2:Expr> => Expr::Sub(Box::new(e), Box::new(e2)),
-//     <e:Term> => e
-// }
-
-// Term: Expr = {
-//     <e:Factor> "*" <e2:Term> => Expr::Mul(Box::new(e), Box::new(e2)),
-//     <e:Factor> "/" <e2:Term> => Expr::Div(Box::new(e), Box::new(e2)),
-//     <e:Factor> => e
-// }
-
-// Factor: Expr = {
-//     <e:Primary> "^" <e2:Factor> => Expr::Pow(Box::new(e), Box::new(e2)),
-//     <e:Primary> => e
-// }
-
-// Primary: Expr = {
-//     <n:Number> => Expr::Number(n),
-//     <i:Ident> => Expr::Ident(i),
-//     "(" <e:Expr> ")" => e
-// }
 
 // Number: f64 = {
 //     <n:r"[0-9]+(\.[0-9]+)?"> => f64::from_str(n).unwrap()
