@@ -10,7 +10,6 @@ pub Program: Vec<Declaration> = {
 
 Declaration: Declaration = {
     <Ident> "=" <Expr> ";" => { 
-        symbols.insert(<>);
         Declaration::Assign(<>)
         // set the value of the identifier in the symbol table
     },
