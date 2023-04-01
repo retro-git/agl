@@ -11,7 +11,7 @@ fn main() {
 
 #[test]
 fn test() {
-    let parsed = parser::ProgramParser::new().parse(&mut HashMap::new(), "x = 14 + 7 * 2;").unwrap();
+    let parsed = parser::ProgramParser::new().parse(&mut HashMap::new(), "x = 14 + 7 * 2; write8 (x * 2) 4;").unwrap();
     // debug print
     println!("{:?}", parsed);
     assert!(false);

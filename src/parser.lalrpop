@@ -18,18 +18,22 @@ Declaration: Declaration = {
 }
 
 Expr: i32 = {
-    <l:Expr> "+" <r:Factor> => l + r,
-    <l:Expr> "-" <r:Factor> => l - r,
-    Factor,
-};
-
-Factor: i32 = {
-    <l:Factor> "*" <r:Term> => l * r,
-    <l:Factor> "/" <r:Term> => l / r,
     Term,
 };
 
 Term: i32 = {
+    <l:Term> "+" <r:Factor> => l + r,
+    <l:Term> "-" <r:Factor> => l - r,
+    Factor,
+};
+
+Factor: i32 = {
+    <l:Factor> "*" <r:Primary> => l * r,
+    <l:Factor> "/" <r:Primary> => l / r,
+    Primary,
+};
+
+Primary: i32 = {
     Num,
     <i:Ident> => {
         // lookup the value of the identifier in the symbol table
@@ -45,10 +49,6 @@ Num: i32 = {
 Ident: String = {
     //ident starts with an alpha, followed by any number of alphanum and underscore
     <s:r"[a-zA-Z_][a-zA-Z0-9_]*"> => String::from_str(s).unwrap()
-}
-
-Int: i32 = {
-    <n:r"[0-9]+"> => i32::from_str(n).unwrap()
 }
 
 // Number: f64 = {
