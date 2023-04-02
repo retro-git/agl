@@ -1,8 +1,21 @@
-// use crate::ast::*;
+use crate::ast::*;
 
-// pub fn compile(ast: Vec<Declaration>) -> Vec<String> {
-//     let mut gs = Vec::new();
-//     for current_declaration in ast {
-//         match current_declaration {
-//             Declaration::
+pub struct Compiler {
+    code: Vec<String>,
+    program: Vec<Declaration>,
+}
+
+// fn compile(program: Vec<Declaration>) -> Vec<String> {
+//     for declaration in program {
+//         match declaration {
+//             Declaration::Assign(ident, expr) => {
+//                 let mut code = compile_expr(expr);
+//                 code.push(format!("mov {}, {}", ident, code.pop().unwrap()));
+//                 return code;
+//             }
+//             Declaration::Statement(statement) => {
+//                 return compile_statement(statement);
+//             }
+//         }
+//     }
 // }

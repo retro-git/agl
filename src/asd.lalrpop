@@ -34,7 +34,6 @@ FactorOp: BinOp = {
 
 Term: Box<Expr> = {
     Num => Box::new(Expr::Number(<>)),
-    Ident => Box::new(Expr::Ident(<>)),
     "(" <Expr> ")"
 };
 

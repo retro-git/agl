@@ -10,23 +10,33 @@
 //     Sub,
 // }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Expr {
-    Int(i32),
+    Number(i32),
     Ident(String),
+    Op(Box<Expr>, BinOp, Box<Expr>),
+}
+
+#[derive(Debug, Clone)]
+pub enum BinOp {
+    Mul,
+    Div,
+    Add,
+    Sub,
 }
 
 #[derive(Debug)]
 pub enum Statement {
-    Write8(i32, i32),
+    Write8(Box<Expr>, Box<Expr>),
 }
 
 #[derive(Debug)]
 pub enum Declaration {
-    Assign(String, i32),
+    Assign(String, Box<Expr>),
     Statement(Statement),
 }
 
+// #[derive(Debug)]
 // pub struct Program {
 //     pub declarations: Vec<Declaration>,
 // }
