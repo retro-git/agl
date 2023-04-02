@@ -1,45 +1,58 @@
 use std::str::FromStr;
 use agl_rs::ast::*;
+use std::collections::HashMap;
 
-grammar;
+grammar(symbols: &mut HashMap<String, i32>, output: &mut Vec<GSInstruction>);
 
-pub Program: Vec<Declaration> = {
-    <Declaration*> => <>
+pub Program: () = {
+    Statement*,
 }
 
-Declaration: Declaration = {
-    <i:Ident> "=" <e:Expr> ";" => Declaration::Assign(<>),
-    "write8" <Expr> <Expr> ";" => Declaration::Statement(Statement::Write8(<>)), 
+Statement: () = {
+    Block,
+    <i:Ident> "=" <e:Expr> ";" => { 
+        symbols.insert(i.clone(), e);
+    },
+    <GSInstruction> => {
+        output.push(<>);
+    }, 
 }
 
-pub Expr: Box<Expr> = { // (1)
-    Expr ExprOp Factor => Box::new(Expr::Op(<>)), // (2)
-    Factor,
-};
+Block: () = {
+    "{" Statement* "}" => (),
+}
 
-ExprOp: BinOp = { // (3)
-    "+" => BinOp::Add,
-    "-" => BinOp::Sub,
-};
+GSInstruction: GSInstruction = {
+    "write8" <Expr> <Expr> ";" => GSInstruction::Write8(<>),
+}
 
-Factor: Box<Expr> = {
-    Factor FactorOp Term => Box::new(Expr::Op(<>)),
+Expr: i32 = {
     Term,
 };
 
-FactorOp: BinOp = {
-    "*" => BinOp::Mul,
-    "/" => BinOp::Div,
+Term: i32 = {
+    <l:Term> "+" <r:Factor> => l + r,
+    <l:Term> "-" <r:Factor> => l - r,
+    Factor,
 };
 
-Term: Box<Expr> = {
-    Num => Box::new(Expr::Number(<>)),
-    Ident => Box::new(Expr::Ident(<>)),
-    "(" <Expr> ")"
+Factor: i32 = {
+    <l:Factor> "*" <r:Primary> => l * r,
+    <l:Factor> "/" <r:Primary> => l / r,
+    Primary,
+};
+
+Primary: i32 = {
+    Num,
+    <i:Ident> => {
+        // lookup the value of the identifier in the symbol table
+        symbols.get(&i).unwrap().clone()
+    },
+    "(" <Expr> ")",
 };
 
 Num: i32 = {
-    r"[0-9]+" => i32::from_str(<>).unwrap()
+    r"[0-9]+" => i32::from_str(<>).unwrap(),
 };
 
 Ident: String = {
@@ -50,4 +63,3 @@ Ident: String = {
 // Number: f64 = {
 //     <n:r"[0-9]+(\.[0-9]+)?"> => f64::from_str(n).unwrap()
 // }
-
