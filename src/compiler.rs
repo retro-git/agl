@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use crate::parser::ProgramParser;
+use rayon::prelude::*;
 
 #[derive(Debug, Clone, Copy)]
 pub enum BitWidth {
@@ -29,7 +30,7 @@ pub enum Mode {
 
 pub fn compile(source: String, mode: Mode) -> String {
     let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source).unwrap();
-    parsed.into_iter().map(|instruction| { instruction_to_string(mode, instruction) }).collect::<Vec<String>>().join("\n")
+    parsed.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n")
 }
 
 fn instruction_to_string(mode: Mode, instruction: GSInstruction) -> String {

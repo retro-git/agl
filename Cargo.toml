@@ -11,4 +11,5 @@ lalrpop = "0.19.9"
 [dependencies]
 clap = { version = "4.2.1", features = ["derive"] }
 lalrpop-util = {version = "0.19.9", features = ["lexer"]}
+rayon = "1.7.0"
 regex = "1.7.3"

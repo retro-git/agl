@@ -1,4 +1,4 @@
-x = 1;
+x = 10;
 addr = 0x1c0;
 
 write 8 addr x;
