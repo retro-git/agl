@@ -1,8 +1,10 @@
 GAME_STATE = 0x681C8;
 LOADING_HUBS = 5;
 
-if 16 (GAME_STATE == LOADING_HUBS)
+//asdfsadfsa
+
+if(16, GAME_STATE == LOADING_HUBS)
 {
-    write 8 5 + 10 4;
-    write 8 5 4;
+    write(8, GAME_STATE, LOADING_HUBS + 1);
+    write(8, GAME_STATE, LOADING_HUBS);
 }

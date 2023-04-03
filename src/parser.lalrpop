@@ -4,17 +4,29 @@ use std::collections::HashMap;
 
 grammar(symbols: &mut HashMap<String, i32>);
 
+match {
+    "+", "-", "*", "/", "(", ")", "{", "}", "=", ";", "if", "write", "8", "16", "32", "==", "!=", "<", ">", ",",
+    r"[0-9]+", r"0[xX][0-9a-fA-F]+", r"[a-zA-Z_][a-zA-Z0-9_]*",
+    r"\s*" => {},
+    //skip comments
+    r"//.*" => {},
+    r"/\*([^\*]*\*+[^\*/])*([^\*]*\*+|[^\*])*\*/" => {},
+}
+
 pub Program: Vec<GSInstruction> = {
     <Statement*> => <>.into_iter().flatten().collect::<Vec<_>>(),
 }
 
 Statement: Vec<GSInstruction> = {
-    Block,
+    <l: @L> <b:Block> <r: @R> => {
+        println!("l: {:?}, r: {:?}", l, r);
+        b
+    },
     <i:Ident> "=" <e:Expr> ";" => { 
         symbols.insert(i, e);
         vec![]
     },
-    "if" <b:BitWidth> "(" <addr:Expr> <op:LogicalOp> <e:Expr> ")" <s:Statement> => {
+    "if" "(" <b:BitWidth> "," <addr:Expr> <op:LogicalOp> <e:Expr> ")" <s:Statement> => {
         // intersperse the conditional with the statements
         s.into_iter().map(|i| vec![GSInstruction::Conditional(b, op, addr, e), i]).flatten().collect::<Vec<_>>()
     },
@@ -26,7 +38,8 @@ Block: Vec<GSInstruction> = {
 }
 
 GSInstruction: GSInstruction = {
-    "write" <b:BitWidth> <addr:Expr> <e:Expr> ";" => GSInstruction::Write(b, addr, e),
+    // "write" <b:BitWidth> <addr:Expr> <e:Expr> ";" => GSInstruction::Write(b, addr, e),
+    "write" "(" <b:BitWidth> "," <addr:Expr> "," <e:Expr> ")" ";" => GSInstruction::Write(b, addr, e),
 }
 
 Expr: i32 = {
