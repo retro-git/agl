@@ -1,3 +1,6 @@
+use std::collections::HashMap;
+use crate::parser::ProgramParser;
+
 #[derive(Debug, Clone, Copy)]
 pub enum BitWidth {
     Bit8,
@@ -18,18 +21,18 @@ pub enum GSInstruction {
     Conditional(BitWidth, LogicalOp, i32, i32),
     Write(BitWidth, i32, i32),
 }
-
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, clap::ValueEnum)]
 pub enum Mode {
     PSX,
     N64
 }
 
-pub fn compile(mode: Mode, instructions: Vec<GSInstruction>) -> String {
-    instructions.into_iter().map(|instruction| { gsinstruction_to_string(mode, instruction) }).collect::<Vec<String>>().join("\n")
+pub fn compile(source: String, mode: Mode) -> String {
+    let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source).unwrap();
+    parsed.into_iter().map(|instruction| { instruction_to_string(mode, instruction) }).collect::<Vec<String>>().join("\n")
 }
 
-fn gsinstruction_to_string(mode: Mode, instruction: GSInstruction) -> String {
+fn instruction_to_string(mode: Mode, instruction: GSInstruction) -> String {
     use GSInstruction::*;
     use BitWidth::*;
     use LogicalOp::*;

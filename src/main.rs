@@ -1,23 +1,31 @@
-use std::collections::HashMap;
-use agl::agl::*;
-use std::fs;
+use agl::compiler::*;
+use clap::Parser;
 
-#[macro_use] extern crate lalrpop_util;
+#[derive(Parser)]
+#[command(name = "agl", version = "0.1.0", about = "A DSL for writing GameShark codes")]
+struct Cli {
+    input_files: Vec<String>,
 
-lalrpop_mod!(pub parser); // synthesized by LALRPOP
+    #[arg(short, long, value_enum)]
+    mode: Mode,
+    
+    #[arg(short, long, default_value_t = false)]
+    concat: bool,
+}
 
 fn main() {
-    println!("Hello, world!");
-    
+    let cli = Cli::parse();
+
+    println!("input: {:?}", cli.input_files);
+    println!("input: {:?}", cli.mode);
+    println!("input: {:?}", cli.concat);
 }
 
 #[test]
 fn test() {
     //load code from /agl/block.agl
     let code = fs::read_to_string("agl/block.agl").unwrap();
-    let parsed = parser::ProgramParser::new().parse(&mut HashMap::new(), &code).unwrap();
-    println!("{:?}", parsed);
-    let compiled = compile(Mode::PSX, parsed);
+    let compiled = compile(code, Mode::PSX);
     println!("{:?}", compiled);
     assert!(false);
 }
