@@ -1,7 +1,9 @@
-x = 14 + 7 * 2; 
-write 8 x + 2 4;
+x = 1;
+addr = 0x1c0;
 
-if 8 (0xffff == 28)
+write 8 addr x;
+
+if 8 (0xffff == 0x28)
 {
     write 8 x + 10 4;
     write 8 x + 10 4;

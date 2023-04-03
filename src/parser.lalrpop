@@ -1,5 +1,5 @@
 use std::str::FromStr;
-use agl_rs::agl::*;
+use agl::agl::*;
 use std::collections::HashMap;
 
 grammar(symbols: &mut HashMap<String, i32>);
@@ -11,7 +11,7 @@ pub Program: Vec<GSInstruction> = {
 Statement: Vec<GSInstruction> = {
     Block,
     <i:Ident> "=" <e:Expr> ";" => { 
-        symbols.insert(i.clone(), e);
+        symbols.insert(i, e);
         vec![]
     },
     "if" <b:BitWidth> "(" <addr:Expr> <op:LogicalOp> <e:Expr> ")" <s:Statement> => {
@@ -50,7 +50,7 @@ Primary: i32 = {
     Hex,
     <i:Ident> => {
         // lookup the value of the identifier in the symbol table
-        symbols.get(&i).unwrap().clone()
+        *symbols.get(&i).unwrap()
     },
     "(" <Expr> ")",
 };
