@@ -2,7 +2,7 @@ use std::str::FromStr;
 use agl_rs::agl::*;
 use std::collections::HashMap;
 
-grammar(symbols: &mut HashMap<String, i32>, output: &mut Vec<GSInstruction>);
+grammar(symbols: &mut HashMap<String, i32>);
 
 pub Program: Vec<GSInstruction> = {
     <Statement*> => <>.into_iter().flatten().collect::<Vec<_>>(),
@@ -15,15 +15,8 @@ Statement: Vec<GSInstruction> = {
         vec![]
     },
     "if" <b:BitWidth> "(" <addr:Expr> <op:LogicalOp> <e:Expr> ")" <s:Statement> => {
-        let mut if_instruction = GSInstruction::Conditional(b, op, addr, e);
-
-        //for each s in statement, place if_block before it
-        let mut out = vec![];
-        for i in s {
-            out.push(if_instruction.clone());
-            out.push(i);
-        }
-        out
+        // intersperse the conditional with the statements
+        s.into_iter().map(|i| vec![GSInstruction::Conditional(b, op, addr, e), i]).flatten().collect::<Vec<_>>()
     },
     <GSInstruction> => vec![<>],
 }
