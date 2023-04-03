@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 use crate::parser::ProgramParser;
-use rayon::prelude::*;
 
 #[derive(Debug, Clone, Copy)]
 pub enum BitWidth {
