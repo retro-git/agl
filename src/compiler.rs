@@ -42,7 +42,7 @@ fn instruction_to_string(mode: Mode, instruction: GSInstruction) -> String {
             match (mode, width) {
                 //example: addr = 0xffff and value = 0x12: 3000ffff 0012
                 (PSX, Bit8) => format!("30{:06x} {:04x}", addr & 0xffffff, value & 0xff),
-                (PSX, Bit16) => format!("30{:06x} {:04x}", addr & 0xffffff, value & 0xffff),
+                (PSX, Bit16) => format!("80{:06x} {:04x}", addr & 0xffffff, value & 0xffff),
                 (PSX, Bit32) => panic!("PSX does not support 32-bit writes"),
 
                 (N64, Bit8) => format!("80{:06x} {:04x}", addr & 0xffffff, value & 0xff),
