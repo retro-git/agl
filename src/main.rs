@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use agl_rs::ast::*;
+use agl_rs::agl::*;
 use std::fs;
 
 #[macro_use] extern crate lalrpop_util;
@@ -16,7 +16,7 @@ fn test() {
     let mut output: Vec<GSInstruction> = Vec::new();
     //load code from /agl/block.agl
     let code = fs::read_to_string("agl/block.agl").unwrap();
-    parser::ProgramParser::new().parse(&mut HashMap::new(), &mut output, &code).unwrap();
-    println!("{:?}", output);
+    let parsed = parser::ProgramParser::new().parse(&mut HashMap::new(), &mut output, &code).unwrap();
+    println!("{:?}", parsed);
     assert!(false);
 }

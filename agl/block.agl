@@ -1,6 +1,9 @@
 x = 14 + 7 * 2; 
-write8 x + 2 4;
+write 8 x + 2 4;
 
+if 8 (0xffff == 28)
 {
-    write8 x + 10 4;
+    write 8 x + 10 4;
+    write 8 x + 10 4;
+    write 8 x + 10 4;
 }
