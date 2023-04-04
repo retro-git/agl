@@ -1,0 +1,102 @@
+use std::str::FromStr;
+use crate::compiler::*;
+use std::collections::HashMap;
+
+grammar(symbols: &mut HashMap<String, i32>);
+
+match {
+    "+", "-", "*", "/", "(", ")", "{", "}", "=", ";", "if", "write", "8", "16", "32", "==", "!=", "<", ">", ",",
+    r"[0-9]+", r"0[xX][0-9a-fA-F]+", r"[a-zA-Z_][a-zA-Z0-9_]*",
+    r"\s*" => {},
+    //skip comments
+    r"//.*" => {},
+    r"/\*([^\*]*\*+[^\*/])*([^\*]*\*+|[^\*])*\*/" => {},
+}
+
+pub Program: Vec<GSInstruction> = {
+    <Statement*> => <>.into_iter().flatten().collect::<Vec<_>>(),
+}
+
+Statement: Vec<GSInstruction> = {
+    <l: @L> <b:Block> <r: @R> => {
+        println!("l: {:?}, r: {:?}", l, r);
+        b
+    },
+    <i:Ident> "=" <e:Expr> ";" => { 
+        symbols.insert(i, e);
+        vec![]
+    },
+    "if" "(" <b:BitWidth> "," <addr:Expr> <op:LogicalOp> <e:Expr> ")" <s:Statement> => {
+        // intersperse the conditional with the statements
+        s.into_iter().map(|i| vec![GSInstruction::Conditional(b, op, addr, e), i]).flatten().collect::<Vec<_>>()
+    },
+    <GSInstruction> => vec![<>],
+}
+
+Block: Vec<GSInstruction> = {
+    "{" <Statement*> "}" => <>.into_iter().flatten().collect::<Vec<_>>(),
+}
+
+GSInstruction: GSInstruction = {
+    // "write" <b:BitWidth> <addr:Expr> <e:Expr> ";" => GSInstruction::Write(b, addr, e),
+    "write" "(" <b:BitWidth> "," <addr:Expr> "," <e:Expr> ")" ";" => GSInstruction::Write(b, addr, e),
+}
+
+Expr: i32 = {
+    Term,
+};
+
+Term: i32 = {
+    <l:Term> "+" <r:Factor> => l + r,
+    <l:Term> "-" <r:Factor> => l - r,
+    Factor,
+};
+
+Factor: i32 = {
+    <l:Factor> "*" <r:Primary> => l * r,
+    <l:Factor> "/" <r:Primary> => l / r,
+    Primary,
+};
+
+Primary: i32 = {
+    Num,
+    Hex,
+    <i:Ident> => {
+        // lookup the value of the identifier in the symbol table
+        *symbols.get(&i).unwrap()
+    },
+    "(" <Expr> ")",
+};
+
+Num: i32 = {
+    r"[0-9]+" => i32::from_str(<>).unwrap(),
+};
+
+Hex: i32 = {
+    r"0[xX][0-9a-fA-F]+" => i32::from_str_radix(<>.trim_start_matches("0x"), 16).unwrap(),
+};
+
+Ident: String = {
+    //ident starts with an alpha, followed by any number of alphanum and underscore
+    <s:r"[a-zA-Z_][a-zA-Z0-9_]*"> => String::from_str(s).unwrap()
+}
+
+LogicalOp: LogicalOp = {
+    "==" => LogicalOp::Equal,
+    "!=" => LogicalOp::NotEqual,
+    "<" => LogicalOp::LessThan,
+    ">" => LogicalOp::GreaterThan,
+}
+
+BitWidth: BitWidth = {
+    "8" => BitWidth::Bit8,
+    "16" => BitWidth::Bit16,
+    "32" => BitWidth::Bit32,
+}
+
+// pub Hex: () = {
+//     r"0[xX][0-9a-fA-F]+" => ()
+// };
+// Float: f64 = {
+//     <n:r"[0-9]+(\.[0-9]+)?"> => f64::from_str(n).unwrap()
+// }

@@ -1,0 +1,11 @@
+/Users/retro/projects/code/agl/target/debug/deps/anstyle_parse-bac2fb28da123d95.rmeta: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/params.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/definitions.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/table.rs
+
+/Users/retro/projects/code/agl/target/debug/deps/libanstyle_parse-bac2fb28da123d95.rlib: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/params.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/definitions.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/table.rs
+
+/Users/retro/projects/code/agl/target/debug/deps/anstyle_parse-bac2fb28da123d95.d: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/params.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/definitions.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/table.rs
+
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/lib.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/params.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/mod.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/definitions.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/anstyle-parse-0.1.1/src/state/table.rs:

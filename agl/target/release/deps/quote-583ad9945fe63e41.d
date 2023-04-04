@@ -1,0 +1,13 @@
+/Users/retro/projects/code/agl/agl/target/release/deps/quote-583ad9945fe63e41.rmeta: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ext.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/format.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ident_fragment.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/to_tokens.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/runtime.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/spanned.rs
+
+/Users/retro/projects/code/agl/agl/target/release/deps/libquote-583ad9945fe63e41.rlib: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ext.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/format.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ident_fragment.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/to_tokens.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/runtime.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/spanned.rs
+
+/Users/retro/projects/code/agl/agl/target/release/deps/quote-583ad9945fe63e41.d: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ext.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/format.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ident_fragment.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/to_tokens.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/runtime.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/spanned.rs
+
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/lib.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ext.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/format.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/ident_fragment.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/to_tokens.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/runtime.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/quote-1.0.26/src/spanned.rs:

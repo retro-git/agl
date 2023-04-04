@@ -1,0 +1,12 @@
+/Users/retro/projects/code/agl/target/debug/deps/term-8d95b63f4946c277.rmeta: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/searcher.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/compiled.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/names.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parm.rs
+
+/Users/retro/projects/code/agl/target/debug/deps/libterm-8d95b63f4946c277.rlib: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/searcher.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/compiled.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/names.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parm.rs
+
+/Users/retro/projects/code/agl/target/debug/deps/term-8d95b63f4946c277.d: /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/lib.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/mod.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/searcher.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/compiled.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/names.rs /Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parm.rs
+
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/lib.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/mod.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/searcher.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/compiled.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parser/names.rs:
+/Users/retro/.cargo/registry/src/github.com-1ecc6299db9ec823/term-0.7.0/src/terminfo/parm.rs:
