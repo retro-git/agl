@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use crate::parser::ProgramParser;
+use wasm_bindgen::prelude::*;
 
 #[derive(Debug, Clone, Copy)]
 pub enum BitWidth {
@@ -20,13 +21,18 @@ pub enum LogicalOp {
 pub enum GSInstruction {
     Conditional(BitWidth, LogicalOp, i32, i32),
     Write(BitWidth, i32, i32),
+    Incr(BitWidth, i32, i32),
+    Decr(BitWidth, i32, i32),
 }
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, clap::ValueEnum)]
+#[wasm_bindgen]
 pub enum Mode {
     PSX,
     N64
 }
 
+#[wasm_bindgen]
 pub fn compile(source: String, mode: Mode) -> String {
     let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source).unwrap();
     parsed.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n")
@@ -74,5 +80,6 @@ fn instruction_to_string(mode: Mode, instruction: GSInstruction) -> String {
                 (N64, _, _)                 => panic!("N64 does not support greater or lesser than conditionals"),
             }
         }
+        _ => todo!()
     }
 }
