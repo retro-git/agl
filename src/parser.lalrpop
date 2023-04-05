@@ -5,7 +5,7 @@ use std::collections::HashMap;
 grammar(symbols: &mut HashMap<String, i32>);
 
 match {
-    "+", "-", "*", "/", "(", ")", "{", "}", "=", ";", "if", "write", "8", "16", "32", "==", "!=", "<", ">", ",",
+    "+", "-", "*", "/", "(", ")", "{", "}", "=", ";", "if", "write", "==", "!=", "<", ">", ",",
     r"[0-9]+", r"0[xX][0-9a-fA-F]+", r"[a-zA-Z_][a-zA-Z0-9_]*",
     r"\s*" => {},
     //skip comments
@@ -89,9 +89,12 @@ LogicalOp: LogicalOp = {
 }
 
 BitWidth: BitWidth = {
-    "8" => BitWidth::Bit8,
-    "16" => BitWidth::Bit16,
-    "32" => BitWidth::Bit32,
+    <e:Expr> => match e {
+        8 => BitWidth::Bit8,
+        16 => BitWidth::Bit16,
+        32 => BitWidth::Bit32,
+        _ => panic!("invalid bit width"),
+    }
 }
 
 // pub Hex: () = {
