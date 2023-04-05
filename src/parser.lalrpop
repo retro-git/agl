@@ -89,7 +89,7 @@ LogicalOp: LogicalOp = {
 }
 
 BitWidth: BitWidth = {
-    <e:Expr> => match e {
+    <Expr> => match <> {
         8 => BitWidth::Bit8,
         16 => BitWidth::Bit16,
         32 => BitWidth::Bit32,
