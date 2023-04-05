@@ -5,13 +5,6 @@ AGL is a domain-specific language that compiles to the GameShark code format. Ga
 
 Note that currently, the language only supports compilation to PSX and N64 formats. Also, this project is in an early state and hasn't been thoroughly tested yet. Some feature ideas are below - feel free to PR, give feedback/feature ideas, and report bugs.
 
-## Future development ideas
-* Better error messages when compilation fails.
-* Frontend website to try out the language without the CLI tool, with built-in examples.
-* Support for more platforms (PS2, Dreamcast).
-* Support encoding variables in binary.
-* Syntax highlighting.
-
 ## Example usage
 - Let's say we want to create a code for Spyro 2 that increases lives to 99 and gems to 10,000 when the L2 + R2 + Triangle buttons are pressed.
 - The button states can be found at address 0x800683A0, life count at 0x8006712C, and gem count at 0x800670CC.
@@ -37,3 +30,10 @@ D00683a0 0013
 3006712c 0063
 ```
 - Entering this compiled GameShark into an emulator (or any other way to run GameShark), we can see that the code works as expected.
+
+## Future development ideas
+* Better error messages when compilation fails.
+* Frontend website to try out the language without the CLI tool, with built-in examples.
+* Support for more platforms (PS2, Dreamcast).
+* Support encoding variables in binary.
+* Syntax highlighting.
