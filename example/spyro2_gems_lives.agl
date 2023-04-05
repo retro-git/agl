@@ -1,0 +1,9 @@
+INPUT_STATES = 0x683a0;
+GEMS = 0x670CC;
+LIVES = 0x6712C;
+L2_R2_TRIANGLE = 0x13;
+
+if(16, INPUT_STATES == L2_R2_TRIANGLE) {
+    write(16, GEMS, 10000);
+    write(8, LIVES, 99);
+}

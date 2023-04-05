@@ -19,7 +19,7 @@ pub Program: Vec<GSInstruction> = {
 
 Statement: Vec<GSInstruction> = {
     <l: @L> <b:Block> <r: @R> => {
-        println!("l: {:?}, r: {:?}", l, r);
+        // println!("l: {:?}, r: {:?}", l, r);
         b
     },
     <i:Ident> "=" <e:Expr> ";" => { 
@@ -63,7 +63,7 @@ Primary: i32 = {
     Hex,
     <i:Ident> => {
         // lookup the value of the identifier in the symbol table
-        *symbols.get(&i).unwrap()
+        *symbols.get(&i).expect(format!("undefined identifier: {}", i).as_str())
     },
     "(" <Expr> ")",
 };
