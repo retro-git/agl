@@ -34,12 +34,7 @@ pub enum Mode {
 
 // ffi safe csharp wrapper for compile
 #[no_mangle]
-pub unsafe extern "C" fn compile_csharp(utf16_str: *const u16, utf16_len: i32, mode: i32) -> *mut libc::c_char {
-    let mode = match mode {
-        0 => Mode::PSX,
-        1 => Mode::N64,
-        _ => Mode::PSX,
-    };
+pub unsafe extern "C" fn compile_csharp(utf16_str: *const u16, utf16_len: i32, mode: Mode) -> *mut libc::c_char {
     let slice = std::slice::from_raw_parts(utf16_str, utf16_len as usize);
     let source = String::from_utf16(slice).unwrap();
     let compiled = compile(source, mode);
