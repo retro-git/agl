@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, ffi::CString};
 use crate::parser::ProgramParser;
 use wasm_bindgen::prelude::*;
 
@@ -30,6 +30,25 @@ pub enum GSInstruction {
 pub enum Mode {
     PSX,
     N64
+}
+
+// ffi safe csharp wrapper for compile
+pub extern "C" fn compile_csharp(source: *const libc::c_char, mode: Mode) -> *mut libc::c_char {
+    let source = unsafe { CString::from_raw(source as *mut libc::c_char) };
+    let source = source.to_str().unwrap().to_string();
+    let compiled = compile(source, mode);
+    CString::new(compiled).unwrap().into_raw()
+}
+
+#[no_mangle]
+pub extern "C" fn alloc_c_string() -> *mut libc::c_char {
+    let str = CString::new("foo bar baz").unwrap();
+    str.into_raw()
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_c_string(str: *mut libc::c_char) {
+    unsafe { CString::from_raw(str) };
 }
 
 #[wasm_bindgen]
