@@ -43,8 +43,11 @@ pub unsafe extern "C" fn compile_csharp(utf16_str: *const u16, utf16_len: i32, m
 
 #[wasm_bindgen]
 pub fn compile(source: String, mode: Mode) -> String {
-    let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source).unwrap();
-    parsed.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n")
+    let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source);
+    match parsed {
+        Ok(program) => {program.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n")}
+        Err(e) => {"Failed to compile".to_string()}
+    }
 }
 
 #[wasm_bindgen]
