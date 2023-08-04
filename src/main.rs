@@ -6,7 +6,7 @@ use agl::compiler;
 use std::fs::OpenOptions;
 use std::io::Write;
 
-static VERSION : &'static str = option_env!("CARGO_PKG_VERSION").unwrap_or("unknown");
+const VERSION : &'static str = option_env!("CARGO_PKG_VERSION").unwrap();
 
 #[derive(Parser, Debug)]
 #[command(name = "agl", version = VERSION, about = "A DSL for writing GameShark codes")]
