@@ -61,8 +61,8 @@ fn main() {
 #[test]
 fn test() {
     //load code from /agl/block.agl
-    let code = fs::read_to_string("agl/block.agl").unwrap();
+    let code = fs::read_to_string("example/block.agl").unwrap();
     let compiled = compiler::compile(code, compiler::Mode::PSX);
     println!("{:?}", compiled);
-    assert!(false);
+    assert_eq!(compiled, "D00681c8 0005\n300681c8 0006\nD00681c8 0005\n300681c8 0005");
 }
