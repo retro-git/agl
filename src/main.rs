@@ -60,7 +60,6 @@ fn main() {
 
 #[test]
 fn test() {
-    //load code from /agl/block.agl
     let code = fs::read_to_string("example/block.agl").unwrap();
     let compiled = compiler::compile(code, compiler::Mode::PSX);
     println!("{:?}", compiled);
