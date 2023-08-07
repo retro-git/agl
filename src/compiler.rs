@@ -32,22 +32,36 @@ pub enum Mode {
     N64
 }
 
+#[derive(Debug, Clone)]
+pub struct CompileError;
+
+impl From<lalrpop_util::ParseError<usize, lalrpop_util::lexer::Token<'_>, &str>> for CompileError {
+    fn from(e: lalrpop_util::ParseError<usize, lalrpop_util::lexer::Token<'_>, &str>) -> Self {
+        CompileError
+    }
+}
+
 // ffi safe csharp wrapper for compile
 #[no_mangle]
 pub unsafe extern "C" fn compile_csharp(utf16_str: *const u16, utf16_len: i32, mode: Mode) -> *mut libc::c_char {
     let slice = std::slice::from_raw_parts(utf16_str, utf16_len as usize);
     let source = String::from_utf16(slice).unwrap();
-    let compiled = compile(source, mode);
-    CString::new(compiled).unwrap().into_raw()
+
+    match compile(source, mode) {
+        Ok(compiled) => CString::new(compiled).unwrap().into_raw(),
+        Err(_) => CString::new("failed to compile").unwrap().into_raw()
+    }
 }
 
 #[wasm_bindgen]
-pub fn compile(source: String, mode: Mode) -> String {
-    let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source);
-    match parsed {
-        Ok(program) => {program.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n")}
-        Err(e) => {"Failed to compile".to_string()}
-    }
+pub fn compile_wasm(source: String, mode: Mode) -> String {
+    compile(source, mode).unwrap_or(String::from("failed to compile"))
+}
+
+pub fn compile(source: String, mode: Mode) -> Result<String, CompileError> {
+    let parsed = ProgramParser::new().parse(&mut HashMap::new(), &source)?;
+    let compiled = parsed.iter().map(|instruction| { instruction_to_string(mode, *instruction) }).collect::<Vec<String>>().join("\n");
+    Ok(compiled)
 }
 
 #[wasm_bindgen]

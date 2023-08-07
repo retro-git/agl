@@ -34,7 +34,7 @@ fn main() {
     
     for (i, file) in cli.input_files.iter().enumerate() {
         let code = fs::read_to_string(file).unwrap();
-        let compiled = compiler::compile(code, cli.mode);
+        let compiled = compiler::compile(code, cli.mode).unwrap();
         
         //if concat and output_file is set, write to output_file
         //if concat is set but output_file is not, append to first input file but with .gs extension
@@ -61,7 +61,7 @@ fn main() {
 #[test]
 fn test() {
     let code = fs::read_to_string("example/block.agl").unwrap();
-    let compiled = compiler::compile(code, compiler::Mode::PSX);
+    let compiled = compiler::compile(code, compiler::Mode::PSX).unwrap();
     println!("{:?}", compiled);
     assert_eq!(compiled, "D00681c8 0005\n300681c8 0006\nD00681c8 0005\n300681c8 0005");
 }
