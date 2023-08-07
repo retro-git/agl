@@ -26,6 +26,7 @@ pub enum GSInstruction {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, clap::ValueEnum)]
+#[repr(C)]
 #[wasm_bindgen]
 pub enum Mode {
     PSX,
@@ -36,7 +37,7 @@ pub enum Mode {
 pub struct CompileError;
 
 impl From<lalrpop_util::ParseError<usize, lalrpop_util::lexer::Token<'_>, &str>> for CompileError {
-    fn from(e: lalrpop_util::ParseError<usize, lalrpop_util::lexer::Token<'_>, &str>) -> Self {
+    fn from(_: lalrpop_util::ParseError<usize, lalrpop_util::lexer::Token<'_>, &str>) -> Self {
         CompileError
     }
 }
