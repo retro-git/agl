@@ -5,6 +5,15 @@ on:
     tags:
       - '*'
 
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Trigger the workflow manually'
+        required: true
+      tag:
+        description: 'Tag to use (only applicable when manually triggered)'
+        required: true
+
 jobs:
   build:
     name: Build for multiple platforms
@@ -44,12 +53,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Determine Tag Reference
+        id: tag_ref
+        run: echo "::set-output name=tag_ref::${{ github.event.inputs.trigger || inputs.tag }}"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.tag_ref.outputs.tag_ref }}
+          release_name: Release ${{ steps.tag_ref.outputs.tag_ref }}
           draft: false
           prerelease: false
 
