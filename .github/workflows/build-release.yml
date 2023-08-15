@@ -26,14 +26,17 @@ jobs:
           toolchain: nightly
           override: true
 
-      - name: Build for Linux
-        run: cargo build --release --target x86_64-unknown-linux-gnu
-
       - name: Install ARM Target
         run: rustup target add aarch64-apple-darwin
 
+      - name: Setup ubuntu to macOS cross compiler
+        run: sudo apt-get install -y gcc-aarch64-apple-darwin
+
       - name: Build for macOS
-        run: cargo build --release --target aarch64-apple-darwin
+        run: cargo build --release --target x86_64-apple-darwin
+
+      - name: Build for Linux
+        run: cargo build --release --target x86_64-unknown-linux-gnu
 
       - name: Build for Windows
         run: cargo build --release --target x86_64-pc-windows-gnu
