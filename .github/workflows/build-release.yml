@@ -34,6 +34,9 @@ jobs:
         env:
           RUSTFLAGS: '-C link-arg=-s'
 
+      - name: Install ARM Target
+        run: rustup target add aarch64-apple-darwin
+
       - name: Build for macOS
         run: cargo build --release --target aarch64-apple-darwin
         env:
