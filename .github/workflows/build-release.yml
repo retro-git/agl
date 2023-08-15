@@ -62,4 +62,3 @@ jobs:
         with:
           files: |
             target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
-            target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}.sha256
