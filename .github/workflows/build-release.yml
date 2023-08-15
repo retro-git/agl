@@ -1,84 +1,64 @@
-name: Build and Release
+name: build and release
 
 on:
-  push:
-    tags:
-      - '*'
-
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Tag to use (only applicable when manually triggered)'
-        required: true
+  release:
+    types: [ created ]
+
+permissions:
+  contents: write
 
 jobs:
   build:
-    name: Build for multiple platforms
-    runs-on: ubuntu-latest
-
+    name: ${{ matrix.platform.os_name }} with rust ${{ matrix.toolchain }}
+    runs-on: ${{ matrix.platform.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - os_name: Linux-aarch64
+            os: ubuntu-20.04
+            target: aarch64-unknown-linux-musl
+            bin: agl-linux-arm64
+          - os_name: Linux-x86_64
+            os: ubuntu-20.04
+            target: x86_64-unknown-linux-gnu
+            bin: agl-linux-amd64
+          - os_name: Windows-x86_64
+            os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bin: agl-amd64.exe
+          - os_name: macOS-x86_64
+            os: macOS-latest
+            target: x86_64-apple-darwin
+            bin: agl-darwin-amd64
+          - os_name: macOS-aarch64
+            os: macOS-latest
+            target: aarch64-apple-darwin
+            bin: agl-darwin-arm64
+        toolchain:
+          - stable
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Rust
-        uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - name: Build binary
+        uses: houseabsolute/actions-rust-cross@v0
         with:
-          toolchain: nightly
-          override: true
-
-      - name: Install Podman
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y podman
-  
-      - name: Install cross-rs
-        run: cargo install cross
-
-      - name: Build for macOS
-        run: cross run --release --target aarch64-apple-darwin
-
-      - name: Build for Linux
-        run: cross run --release --target x86_64-unknown-linux-gnu
-
-      - name: Build for Windows
-        run: cross run --release --target x86_64-pc-windows-gnu
-
-  release:
-    needs: build
-    name: Create GitHub Release
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Determine Tag Reference
-        id: tag_ref
-        run: echo "::set-output name=tag_ref::${{ github.event.inputs.trigger || inputs.tag }}"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+          command: "build"
+          target: ${{ matrix.platform.target }}
+          toolchain: ${{ matrix.toolchain }}
+          args: "--locked --release"
+          strip: true
+      - name: Rename binary (linux and macos)
+        run: mv target/${{ matrix.platform.target }}/release/agl target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
+        if: matrix.platform.os_name != 'Windows-x86_64'
+      - name: Rename binary (windows)
+        run: mv target/${{ matrix.platform.target }}/release/agl.exe target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
+        if: matrix.platform.os_name == 'Windows-x86_64'
+      - name: Generate SHA-256
+        run: shasum -a 256 target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }} | cut -d ' ' -f 1 > target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}.sha256
+      - name: Release binary and SHA-256 checksum to GitHub
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag_ref.outputs.tag_ref }}
-          release_name: Release ${{ steps.tag_ref.outputs.tag_ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Linux binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: linux-binary
-          path: target/x86_64-unknown-linux-gnu/release/agl
-
-      - name: Upload macOS binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: mac-binary
-          path: target/x86_64-apple-darwin/release/agl
-
-      - name: Upload Windows binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: windows-binary
-          path: target/x86_64-pc-windows-gnu/release/agl.exe
+          files: |
+            target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
+            target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}.sha256
