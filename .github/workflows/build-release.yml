@@ -35,7 +35,7 @@ jobs:
         run: cargo install cross
 
       - name: Build for macOS
-        run: cross run --release --target x86_64-apple-darwin
+        run: cross run --release --target aarch64-apple-darwin
 
       - name: Build for Linux
         run: cross run --release --target x86_64-unknown-linux-gnu
