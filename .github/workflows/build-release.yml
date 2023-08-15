@@ -27,7 +27,7 @@ jobs:
           - os_name: Windows-x86_64
             os: windows-latest
             target: x86_64-pc-windows-msvc
-            bin: agl-amd64.exe
+            bin: agl-windows-amd64.exe
           - os_name: macOS-x86_64
             os: macOS-latest
             target: x86_64-apple-darwin
