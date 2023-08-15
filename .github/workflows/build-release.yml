@@ -7,9 +7,6 @@ on:
 
   workflow_dispatch:
     inputs:
-      trigger:
-        description: 'Trigger the workflow manually'
-        required: true
       tag:
         description: 'Tag to use (only applicable when manually triggered)'
         required: true
