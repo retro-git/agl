@@ -1,0 +1,8 @@
+enum Mode {
+    "PSX",
+    "N64",
+};
+
+namespace agl {
+    string compile_ffi(string source, Mode mode);
+};

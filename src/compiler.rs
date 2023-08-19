@@ -55,7 +55,7 @@ pub unsafe extern "C" fn compile_csharp(utf16_str: *const u16, utf16_len: i32, m
 }
 
 #[wasm_bindgen]
-pub fn compile_wasm(source: String, mode: Mode) -> String {
+pub fn compile_ffi(source: String, mode: Mode) -> String {
     compile(source, mode).unwrap_or(String::from("failed to compile"))
 }
 
