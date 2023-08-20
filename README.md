@@ -4,7 +4,7 @@
 
 [AGL Windows Editor](https://github.com/retro-git/AGLEditor/)             |  [AGL MacOS/iPadOS Editor](https://github.com/retro-git/AGLEditorSwift/)
 :-------------------------:|:-------------------------:
-![235808032-169061ce-b647-45da-8e6a-e76f3b754cd0](https://github.com/retro-git/agl/assets/43223593/8559f2db-ce35-4a63-a3cf-60992634bb82)  |  ![ezgif-3-4177e9e1d8](https://github.com/retro-git/agl/assets/43223593/2f09d07b-1375-401d-84f9-eba8e717cbf7)
+![ezgif-3-fcfc8b164a](https://github.com/retro-git/agl/assets/43223593/18929a71-61e7-405f-b3fd-3f0fd1be65f2)  |  ![ezgif-3-4177e9e1d8](https://github.com/retro-git/agl/assets/43223593/2f09d07b-1375-401d-84f9-eba8e717cbf7)
 
 
 
