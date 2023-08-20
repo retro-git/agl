@@ -1,5 +1,18 @@
 # Abstract GameShark Language (AGL)
 
+## Related Projects
+
+[AGL Windows Editor](https://github.com/retro-git/AGLEditor/)             |  [AGL MacOS/iPadOS Editor](https://github.com/retro-git/AGLEditorSwift/)
+:-------------------------:|:-------------------------:
+![235808032-169061ce-b647-45da-8e6a-e76f3b754cd0](https://github.com/retro-git/agl/assets/43223593/8559f2db-ce35-4a63-a3cf-60992634bb82)  |  ![ezgif-3-4177e9e1d8](https://github.com/retro-git/agl/assets/43223593/2f09d07b-1375-401d-84f9-eba8e717cbf7)
+
+
+
+
+
+
+
+
 ## About
 AGL is a domain-specific language that compiles to the GameShark code format. GameShark codes are notoriously archaic to both write and read - even moreso than assembly due to the lack of mnemonics and variables. AGL aims to remedy that problem with a much more familiar, high-level syntax.
 
