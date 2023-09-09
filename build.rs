@@ -1,5 +1,3 @@
-use std::process::Command;
-
 extern crate lalrpop;
 
 fn main() {
